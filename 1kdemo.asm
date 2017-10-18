@@ -73,7 +73,7 @@ _Start:
         call    [w32timeBeginPeriod]
         call    [w32timeGetTime]
         mov     edi,eax                 ; edi = beginTime
-    .mainLoop:
+.mainLoop:
         push    0001h                   ; PM_REMOVE
         push    0
         push    0
@@ -98,8 +98,7 @@ _Start:
         test    eax,eax
         jnz     .exit
         jmp     .mainLoop
-    .exit:
-        push    0
+.exit:  push    0
         call    [w32ExitProcess]
         ret
 
@@ -107,23 +106,23 @@ section '.data' data readable writeable
 
 Message:
 PixelFormatDesc:
-  dd 0
-  dd 00000021h                          ; PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER
+    dd 0
+    dd 00000021h                          ; PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER
 ScreenSettings:
-  db 32 dup 0
-  dd 0
-  dw .size
-  dw 0
-  dd 001C0000h                          ; DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL
-  db 60 dup 0
-  dd 32,1920,1080
-  dd 11 dup 0
-  .size = $-ScreenSettings
+    db 32 dup 0
+    dd 0
+    dw .size
+    dw 0
+    dd 001C0000h                          ; DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL
+    db 60 dup 0
+    dd 32,1920,1080
+    dd 11 dup 0
+    .size = $-ScreenSettings
 
 ShaderCodePtr dd ShaderCode
 ShaderCode:
-  file '1kdemo-small.glsl'
-  db 0
+    file '1kdemo-small.glsl'
+    db 0
 
 WinClassName db 'edit',0
 @glCreateShaderProgramv db 'glCreateShaderProgramv',0
