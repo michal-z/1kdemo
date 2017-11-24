@@ -1,1 +1,1 @@
-# 1kdemo
+# 1kdemo fully standalone framework
