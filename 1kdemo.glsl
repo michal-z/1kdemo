@@ -69,7 +69,7 @@ void main()
     for (int i = 0; i < 100; ++i) {
         p = ro + rd * totdist;
         float d = computeDistance(p, q0);
-        if (d <= 0.001) break;
+        if (d <= 0.0001) break;
         totdist += d;
         if (totdist >= 10.0) break;
     }

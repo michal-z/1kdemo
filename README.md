@@ -1,5 +1,3 @@
-# 1kdemo
+# 1kdemo framework
 
-Quaternion Julia Sets rendering in 1020-bytes executable (includes both CPU and GPU code). x86 assembly + GLSL. Fully standalone (no compiler or Visual Studio needed to build). Uses fasm, crinckler and shader_minifier (everything is included in the bin folder).
-
-![image](/qjulia.png)
+Fully standalone (no compiler or Visual Studio needed). Uses fasm, crinckler and shader_minifier (everything included in bin folder). Just fill 1kdemo.glsl file with your shader, run make.bat and release :)
