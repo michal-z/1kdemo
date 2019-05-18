@@ -17,13 +17,11 @@ extrn '__imp__wglCreateContext@4' as wglCreateContext:dword
 extrn '__imp__wglGetProcAddress@4' as wglGetProcAddress:dword
 extrn '__imp__glRecti@16' as glRecti:dword
 extrn '__imp__glTexCoord1f@4' as glTexCoord1f:dword
-extrn '__imp__SetProcessDPIAware@0' as SetProcessDPIAware:dword
 
 section '.text' code readable executable
 
 public _Start
-_Start: call    [SetProcessDPIAware]
-        push    00000004h               ; CDS_FULLSCREEN
+_Start: push    00000004h               ; CDS_FULLSCREEN
         push    ScreenSettings
         call    [ChangeDisplaySettings]
         push    0                       ; lpParam
