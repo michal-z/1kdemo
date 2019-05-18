@@ -55,7 +55,7 @@ float computeDistance(vec3 p, vec4 q0)
 
 void main()
 {
-    float t = gl_TexCoord[0].s * 0.001;
+    float t = gl_TexCoord[0].x * 0.001;
     vec2 st = -1.0 + 2.0 * (gl_FragCoord.xy / vec2(1920, 1080));
     st.x *= 1.777;
     vec3 ro = vec3(0, 0, 2.1);
