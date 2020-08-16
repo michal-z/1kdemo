@@ -21,7 +21,7 @@ section '.text' code readable executable
 
 public _Start
 _Start:
-		push    00000004h               ; CDS_FULLSCREEN
+        push    00000004h               ; CDS_FULLSCREEN
         push    ScreenSettings
         call    [ChangeDisplaySettings]
         push    0                       ; lpParam
