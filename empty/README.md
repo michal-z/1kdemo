@@ -1,1 +1,1 @@
-![image](/qjulia/qjulia.png)
+empty 1k intro
