@@ -9,7 +9,6 @@ extrn '__imp__GetDC@4' as GetDC:dword
 extrn '__imp__GetAsyncKeyState@4' as GetAsyncKeyState:dword
 extrn '__imp__PeekMessageA@20' as PeekMessage:dword
 extrn '__imp__timeGetTime@0' as timeGetTime:dword
-extrn '__imp__timeBeginPeriod@4' as timeBeginPeriod:dword
 extrn '__imp__SwapBuffers@4' as SwapBuffers:dword
 extrn '__imp__ChangeDisplaySettingsA@8' as ChangeDisplaySettings:dword
 extrn '__imp__wglMakeCurrent@8' as wglMakeCurrent:dword
@@ -66,8 +65,6 @@ _Start:
         call    eax                     ; glCreateShaderProgramv
         push    eax                     ; GL program to use
         call    esi                     ; glUseProgram
-        push    1                       ; ask for 1 ms timer resolution
-        call    [timeBeginPeriod]
         call    [timeGetTime]
         mov     edi, eax                ; edi = beginTime
 .mainLoop:
