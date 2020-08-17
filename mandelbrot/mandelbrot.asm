@@ -20,8 +20,7 @@ extrn '__imp__glTexCoord1f@4' as glTexCoord1f:dword
 section '.text' code readable executable
 
 public _Start
-_Start:
-        push    00000004h               ; CDS_FULLSCREEN
+_Start: push    00000004h               ; CDS_FULLSCREEN
         push    ScreenSettings
         call    [ChangeDisplaySettings]
         push    0                       ; lpParam
