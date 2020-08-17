@@ -1,2 +1,2 @@
 # mandelbrot 1k intro test
-**mandelbrot.exe** is **625 bytes** in size.
+**mandelbrot.exe** is **620 bytes** in size.
