@@ -54,9 +54,6 @@ _Start:
         call    [wglMakeCurrent]
         push    0
         call    [ShowCursor]
-        push    S.glUseProgram
-        call    [wglGetProcAddress]
-        mov     esi, eax                ; esi = pointer to glUseProgram
         push    S.glCreateShaderProgramv
         call    [wglGetProcAddress]
         push    ShaderCodePtr
@@ -64,7 +61,9 @@ _Start:
         push    8B30h                   ; GL_FRAGMENT_SHADER
         call    eax                     ; glCreateShaderProgramv
         push    eax                     ; GL program to use
-        call    esi                     ; glUseProgram
+        push    S.glUseProgram
+        call    [wglGetProcAddress]
+        call    eax                     ; glUseProgram
         call    [timeGetTime]
         mov     edi, eax                ; edi = beginTime
 .mainLoop:
@@ -75,7 +74,7 @@ _Start:
         push    Message
         call    [PeekMessage]
         call    [timeGetTime]
-        sub     eax, edi                 ; currentTime = time - beginTime
+        sub     eax, edi                ; currentTime = time - beginTime
         push    eax
         fild    dword [esp]
         fstp    dword [esp]
@@ -89,9 +88,8 @@ _Start:
         call    [SwapBuffers]
         push    1Bh                     ; VK_ESCAPE
         call    [GetAsyncKeyState]
-        test    eax, eax
-        jnz     .exit
-        jmp     .mainLoop
+        xchg    ecx, eax
+        jecxz   .mainLoop
 .exit:  call    [ExitProcess]
 
 section '.data' data readable writeable
@@ -99,13 +97,13 @@ section '.data' data readable writeable
 Message:
 PixelFormatDesc:
     dd 0
-    dd 00000025h                          ; PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_DRAW_TO_WINDOW
+    dd 00000025h                        ; PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_DRAW_TO_WINDOW
 ScreenSettings:
     db 32 dup 0
     dd 0
     dw .size
     dw 0
-    dd 001c0000h                          ; DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL
+    dd 001c0000h                        ; DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL
     db 60 dup 0
     dd 32, 1920, 1080
     dd 11 dup 0
