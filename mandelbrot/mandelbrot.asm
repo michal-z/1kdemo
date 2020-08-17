@@ -66,8 +66,7 @@ _Start:
         call    eax                     ; glUseProgram
         call    [timeGetTime]
         mov     edi, eax                ; edi = beginTime
-.mainLoop:
-        push    0001h                   ; PM_REMOVE
+.loop:  push    0001h                   ; PM_REMOVE
         push    0
         push    0
         push    0
@@ -89,10 +88,13 @@ _Start:
         push    1Bh                     ; VK_ESCAPE
         call    [GetAsyncKeyState]
         xchg    ecx, eax
-        jecxz   .mainLoop
+        jecxz   .loop
 .exit:  call    [ExitProcess]
 
 section '.data' data readable writeable
+
+DM_PELSWIDTH equ 0x000080000
+DM_PELSHEIGHT equ 0x00100000
 
 Message:
 PixelFormatDesc:
@@ -103,10 +105,10 @@ ScreenSettings:
     dd 0
     dw .size
     dw 0
-    dd 001c0000h                        ; DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL
-    db 60 dup 0
-    dd 32, 1920, 1080
-    dd 11 dup 0
+    dd DM_PELSWIDTH + DM_PELSHEIGHT
+    db 64 dup 0
+    dd 1920, 1080
+    dd 10 dup 0
     .size = $-ScreenSettings
 
 ShaderCodePtr dd ShaderCode
